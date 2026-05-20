@@ -37,17 +37,25 @@ void handle_client(int client_fd)
     close(client_fd);
 
 }
-int main()
+int main(int argc,char* argv[])
 {
+
+    int backlog_size = 100; 
+    if (argc > 1) {
+        backlog_size = atoi(argv[1]);
+    }
     cout<<"Starting server"<<endl;
 
-    int server_fd=socket(AF_INET,SOCK_STREAM,0);
+    int server_fd = socket(AF_INET, SOCK_STREAM, 0);
+    int opt = 1;
+    setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
     if(server_fd==-1)
     {
         cerr<<"Failed to create socket";
         close(server_fd);
         return 1;
     }
+    
     cout<<"socket created"<<server_fd<<endl;
     
     sockaddr_in server_addr;
@@ -61,7 +69,7 @@ int main()
         close(server_fd);
         return 1;
     }
-    int listen_ret_value=listen(server_fd,5);
+    int listen_ret_value=listen(server_fd,backlog_size);
     if(listen_ret_value==-1)
     {
         cerr<<"Failed to listen to any incoming connections";
