@@ -18,8 +18,11 @@ void handle_client(int client_fd)
     while(chat_protocol::receive_message(client_fd,incoming_msg))
     {
         cout<<"Data Received"<<client_fd<<":"<<incoming_msg<<endl;
+        vector<int>client_fd_copy;
         clients_mutex.lock();
-        for(int other_client_fd:active_clients)
+        client_fd_copy=active_clients;
+        clients_mutex.unlock();
+        for(int other_client_fd:client_fd_copy)
         {
             if(other_client_fd!=client_fd)
             {
@@ -27,7 +30,7 @@ void handle_client(int client_fd)
                 cerr<<"Failed to broadcast message to client"<<other_client_fd<<endl;
             }
         }
-        clients_mutex.unlock();
+    
     }
     cout << "Client " << client_fd << " disconnected." << endl;
     clients_mutex.lock();

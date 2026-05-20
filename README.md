@@ -34,7 +34,7 @@ When multiple client worker threads attempted to write to `std::cout` concurrent
 
 The server was benchmarked using a multi-dimensional parameter grid across 10 steps of connection volumes (50 to 400 clients) and 10 steps of kernel queue limits (10 to 300 backlog entries).
 
-![Network Spectrum Metrics](tests/charts_raw_sockets.png)
+![Network Spectrum Metrics](tests/charts_raw_sockets_1.png)
 
 ### Performance Analysis & Behavioral Insights
 
