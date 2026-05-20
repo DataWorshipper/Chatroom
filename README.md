@@ -1,4 +1,4 @@
-# High-Performance Multi-Threaded Chatroom Engine
+# Multi-Threaded Chatroom Engine
 
 A concurrent network chatroom server and client framework implemented in C++ using POSIX TCP sockets, native multi-threading, and a custom packet framing protocol. This repository features an automated benchmarking suite constructed in Python using `asyncio` and `numpy` to stress-test the server, expose operating system constraints, and map performance spectrums under load.
 
